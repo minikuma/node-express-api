@@ -4,6 +4,8 @@
  * Github : http://github.com/minikuma
  */
 
+import { addNewContact, getContact, getContactWitID } from "../controllers/crmController";
+
 const routes = (app) => {
     app.route('/contact')
         .get((req, res, next) => {
@@ -11,13 +13,11 @@ const routes = (app) => {
             console.log(`Request from : ${req.originalUrl}`)
             console.log(`Request from : ${req.method}`)
             next();
-        }, ((req, res, next) => {
-            res.send('GET Request successful!!')
-        }))
-        .post((req, res) => {
-            res.send('POST Request successful!!')
-        })
+        }, getContact)
+        .post(addNewContact);
+
     app.route('/contact/:contactID')
+        .get(getContactWitID)
         .put((req, res) => {
             res.send('PUT Request successful!!')
         })

@@ -5,10 +5,30 @@
  */
 
 import express from 'express';
-import routes from './src/routes/crmRoutes'
+import routes from './src/routes/crmRoutes';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 4000;
+
+// mongoose connection
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://45.32.29.18/CRMdb', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+// mongoose connection check
+const mongo_db = mongoose.connection;
+mongo_db.on('error', console.error.bind(console, 'connection error'));
+mongo_db.once('open', () => {
+    console.log('mongo db connection OK')
+});
+
+// body-parser setup
+app.use(bodyParser.urlencoded( {extended: true} ));
+app.use(bodyParser.json());
 
 routes(app)
 
