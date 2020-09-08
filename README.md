@@ -9,4 +9,6 @@
 #### APIs
 * POST: /contents
 * GET: /contents
-* GET: /contact/:contactID   (contactID 기)준
+* GET: /contact/:contactID
+* PUT: /contact/:contactID
+* DELETE:/ contact/:contactID

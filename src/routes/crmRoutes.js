@@ -4,7 +4,7 @@
  * Github : http://github.com/minikuma
  */
 
-import { addNewContact, getContact, getContactWitID } from "../controllers/crmController";
+import { addNewContact, getContact, getContactWitID, updateContact, deleteContact } from "../controllers/crmController";
 
 const routes = (app) => {
     app.route('/contact')
@@ -14,16 +14,19 @@ const routes = (app) => {
             console.log(`Request from : ${req.method}`)
             next();
         }, getContact)
+
+        // post end-point
         .post(addNewContact);
 
     app.route('/contact/:contactID')
+        // get a specify contact
         .get(getContactWitID)
-        .put((req, res) => {
-            res.send('PUT Request successful!!')
-        })
-        .delete((req, res) => {
-            res.send('DELETE Request successful!!')
-        })
+
+        // updating a specify contact
+        .put(updateContact)
+
+        // deleting a specify contact
+        .delete(deleteContact)
 }
 
 export default routes;
